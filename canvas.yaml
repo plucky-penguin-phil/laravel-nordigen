@@ -1,0 +1,6 @@
+preset: laravel
+
+namespace: PluckyPenguin\LaravelNordigen
+
+model:
+  namespace: PluckyPenguin\LaravelNordigen\Models
