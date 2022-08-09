@@ -22,5 +22,15 @@
     },
     "require-dev": {
         "orchestra/canvas": "^6.10"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PluckyPenguin\\LaravelNordigen\\NordigenServiceProvider"
+            ],
+            "aliases": {
+                "NordigenClient": "PluckyPenguin\\LaravelNordigen\\Facades\\NordigenClient"
+            }
+        }
     }
 }
