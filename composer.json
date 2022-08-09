@@ -1,6 +1,6 @@
 {
     "name": "pluckypenguin/laravel-nordigen",
-    "description": "Nordigen API client for Laravel.",
+    "description": "Laravel package wrapper for Nordigen's PHP library.",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -15,6 +15,7 @@
         }
     ],
     "require": {
+        "php": ">=7.4",
         "guzzlehttp/guzzle": "^7.4",
       "ext-json": "*",
         "symfony/http-foundation": "^5.4",
