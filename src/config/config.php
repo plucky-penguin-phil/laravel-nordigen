@@ -9,7 +9,7 @@ return [
     | Enter your Nordigen API secret id for this app.
     |
     */
-    'secret_id'   => env('NORDIGEN_SECRET_ID', ''),
+    'secret_id'       => env('NORDIGEN_SECRET_ID', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ return [
     | Enter your Nordigen PI secret key for this app.
     |
     */
-    'secret_key'  => env('NORDIGEN_SECRET_KEY', ''),
+    'secret_key'      => env('NORDIGEN_SECRET_KEY', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -29,5 +29,16 @@ return [
     | If you wish to only use the Nordigen sandbox provider then set this to true.
     |
     */
-    'use_sandbox' => env('NORDIGEN_USE_SANDBOX', false),
+    'use_sandbox'     => env('NORDIGEN_USE_SANDBOX', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | What country should we use?
+    |--------------------------------------------------------------------------
+    |
+    | If no country is set by the user, what country code should we fall back to?
+    | Defaults to gb (United Kingdom)
+    |
+    */
+    'default_country' => env('NORDIGEN_DEFAULT_COUNTRY', 'gb'),
 ];
