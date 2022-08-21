@@ -4,6 +4,8 @@ namespace PluckyPenguin\LaravelNordigen;
 
 use Illuminate\Support\ServiceProvider;
 use Nordigen\NordigenPHP\API\NordigenClient;
+use Illuminate\Routing\Router;
+use PluckyPenguin\LaravelNordigen\Middleware\AuthenticateNordigen;
 
 class NordigenServiceProvider extends ServiceProvider
 {
@@ -14,7 +16,7 @@ class NordigenServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/config.php', 'nordigen');
+        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'nordigen');
 
         $this->app->bind(NordigenClient::class, function () {
             return $this->getNordigenClient();
@@ -40,12 +42,25 @@ class NordigenServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->registerMiddleware();
 
         if ($this->app->runningInConsole()) {
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
             $this->publishes([
-                __DIR__ . '/config/config.php' => config_path('nordigen.php'),
+                __DIR__.'/config/config.php' => config_path('nordigen.php'),
             ], 'config');
         }
+    }
+
+    /**
+     * Alias the packages middleware.
+     *
+     * @return void
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    private function registerMiddleware(): void
+    {
+        $router = $this->app->make(Router::class);
+        $router->aliasMiddleware('auth.nordigen', AuthenticateNordigen::class);
     }
 }
