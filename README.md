@@ -13,6 +13,7 @@ This wrapper allows for easy customisation by adding the following config option
 * `NORDIGEN_SECRET_ID` - Your Nordigen app secret ID
 * `NORDIGEN_SECRET_KEY` - Your Nordigen app secret key
 * `NORDIGEN_USE_SANDBOX` - Should we use the Nordigen sandbox provider, or live providers?
+* `NORDIGEN_DEFAULT_COUNTRY` - The default country code to be used when none is provided. Mostly used for interacting with institutions.
 
 # Usage
 Dependency injection is supported with this package for easily accessing the NordigenClient class:
