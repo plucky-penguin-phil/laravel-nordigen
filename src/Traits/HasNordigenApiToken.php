@@ -1,6 +1,6 @@
 <?php
 
-namespace Pluckypenguin\LaravelNordigen\Traits;
+namespace PluckyPenguin\LaravelNordigen\Traits;
 
 use Carbon\Carbon;
 use PluckyPenguin\LaravelNordigen\Facades\NordigenClient;
