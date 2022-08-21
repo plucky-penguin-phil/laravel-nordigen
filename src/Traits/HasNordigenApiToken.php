@@ -23,29 +23,23 @@ trait HasNordigenApiToken
     }
 
     /**
-     * Sign the user into the Nordigen API.
+     * Get the user's access token for the Nordigen API.
+     * If one has not been created, or it has expired, a new
+     * token will be requested.
      *
-     * @return void
+     * @return string
      */
-    public function authNordigen(): void
+    public function getNordigenAccessToken(): string
     {
-        if (!empty($this->nordigen_access_token) && Carbon::now()->isBefore($this->nordigen_access_expires)) {
-            NordigenClient::setAccessToken($this->nordigen_access_token);
-
-            return;
-        }
-
-        if ($this->hasNordigenAccessTokenExpired()) {
+        if (empty($this->nordigen_access_token) || $this->hasNordigenAccessTokenExpired()) {
             if ($this->hasNordigenRefreshTokenExpired()) {
                 $this->createAccessToken();
             } else {
                 $this->refreshAccessToken();
             }
-
-            return;
         }
 
-        $this->createAccessToken();
+        return $this->nordigen_access_token;
     }
 
     /**
@@ -96,5 +90,31 @@ trait HasNordigenApiToken
         $this->nordigen_access_token   = $token['access'];
         $this->nordigen_access_expires = Carbon::now()->addSeconds($token['access_expires']);
         $this->save();
+    }
+
+    /**
+     * Sign the user into the Nordigen API.
+     *
+     * @return void
+     */
+    public function authNordigen(): void
+    {
+        if (!empty($this->nordigen_access_token) && Carbon::now()->isBefore($this->nordigen_access_expires)) {
+            NordigenClient::setAccessToken($this->nordigen_access_token);
+
+            return;
+        }
+
+        if ($this->hasNordigenAccessTokenExpired()) {
+            if ($this->hasNordigenRefreshTokenExpired()) {
+                $this->createAccessToken();
+            } else {
+                $this->refreshAccessToken();
+            }
+
+            return;
+        }
+
+        $this->createAccessToken();
     }
 }
