@@ -46,3 +46,6 @@ To include this on your route, use the `auth.nordigen` middleware.
 To help you get the most out of the package, there is a user trait called `HasNordigenApiToken` which provides easy access to the access and  refresh tokens.
 In order to use the trait provided with this package, you will need to run the migrations - `php artisan migrate`.
 This will add 4 new columns to your `users` table - `nordigen_access_token`, `nordigen_access_expires`, `nordigen_refresh_token` and `nordigen_refresh_expires`.
+
+# Contributing
+Please feel free to add issues and create pull requests to address any issues you may find, as well as add any missing features.
