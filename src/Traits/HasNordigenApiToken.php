@@ -86,7 +86,7 @@ trait HasNordigenApiToken
      */
     public function refreshAccessToken()
     {
-        $token                         = NordigenClient::exchangeToken($this->nordigen_refresh_token);
+        $token                         = NordigenClient::refreshAccessToken($this->nordigen_refresh_token);
         $this->nordigen_access_token   = $token['access'];
         $this->nordigen_access_expires = Carbon::now()->addSeconds($token['access_expires']);
         $this->save();
